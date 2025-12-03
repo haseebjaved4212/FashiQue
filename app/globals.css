@@ -1,6 +1,19 @@
 @import "tailwindcss";
 
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import "remixicon/fonts/remixicon.css";
+
 :root {
+  --prim: #feeb9d;
+  --prim-light: #fdfbf0;
+  --second: #cc0d39;
+  --white: #fff;
+  --black: #000;
+  --gradient: linear-gradient(307deg, #ffea96 1.9%, #ffb0b0 85.96%);
+  --GolosText: "Golos Text", sans-serif;
+  --Audiowide: "Audiowide", sans-serif;
+  --lufga: var(--font-lufga);
 
+  --transition-regular: 0.3s;
+  -o-transition-slow: 6s;
 }
-
