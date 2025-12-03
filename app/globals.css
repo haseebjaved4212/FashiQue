@@ -17,3 +17,18 @@
   --transition-regular: 0.3s;
   -o-transition-slow: 6s;
 }
+
+.GolosText {
+  font-family: var(--GolosText);
+}
+.Audiowide {
+  font-family: var(--Audiowide);
+}
+.Lufga {
+  font-family: var(--Lufga), sans-serif;
+}
+body{
+  scroll-behavior: smooth;
+  background-color: #FFFAF3;
+  overflow-x: hidden !important;
+}
