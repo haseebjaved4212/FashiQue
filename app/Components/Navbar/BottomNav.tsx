@@ -90,8 +90,18 @@ const BottomNav = () => {
                         </Link>
                     </div>
                 </div>
+                {/* Mobile Menu Button */}
+               <div className="lg:hidden flex items-center justify-between gap-4">
+                <button
+                onClick={()=>setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-2xl focus:outline-none">
+                    <i className="ri-menu-line"></i>
+                </button>
+               </div>
+                    
             </div>
         </div>
+                
     )
 }
 
