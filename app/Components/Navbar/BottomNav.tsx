@@ -26,7 +26,7 @@ const navLinks: NavLink[] = [
 const BottomNav = () => {
     const [isFixed, setIsFixed] = useState(false)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const { cart, wishlist } = useShop()
+    const { cart, wishlist, user, logout } = useShop()
 
     useEffect(() => {
         const handleScroll = () => setIsFixed(window.scrollY > 50);
