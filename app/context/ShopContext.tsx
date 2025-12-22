@@ -53,13 +53,18 @@ export const ShopProvider = ({ children }: { children: React.ReactNode }) => {
     }, [user]);
 
     const addToCart = (product: Product) => {
+        const existing = cart.find(item => item.id === product.id);
+        if (existing) {
+            toast.info("Item quantity updated in cart");
+        } else {
+            toast.success("Added to Cart");
+        }
+
         setCart((prev) => {
-            const existing = prev.find(item => item.id === product.id);
-            if (existing) {
-                toast.info("Item quantity updated in cart");
+            const existingItem = prev.find(item => item.id === product.id);
+            if (existingItem) {
                 return prev.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item);
             }
-            toast.success("Added to Cart");
             return [...prev, { ...product, quantity: 1 }];
         });
     };
@@ -84,14 +89,13 @@ export const ShopProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     const addToWishlist = (product: Product) => {
-        setWishlist(prev => {
-            if (prev.find(item => item.id === product.id)) {
-                toast.info("Already in Wishlist");
-                return prev;
-            }
+        const existing = wishlist.find(item => item.id === product.id);
+        if (existing) {
+            toast.info("Already in Wishlist");
+        } else {
             toast.success("Added to Wishlist");
-            return [...prev, product];
-        });
+            setWishlist(prev => [...prev, product]);
+        }
     };
 
     const removeFromWishlist = (id: number) => {
