@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FashiQue - Modern E-Commerce Platform
 
-## Getting Started
+FashiQue is a premium, fully responsive E-Commerce web application built with **Next.js 15** and **Tailwind CSS v4**. It offers a seamless shopping experience with features like product browsing, category filtering, cart management, wishlist functionality, and user authentication simulation.
 
-First, run the development server:
+![FashiQue Preview](public/E-Commerce-uiCode/assets/Hero.webp)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+### 🛍️ Shopping Experience
+- **Interactive Homepage**: visuals including Hero slider, Hottest Trends, and Popular Products.
+- **Shop Page**: Complete product catalog with real-time **Category Filtering** (Women, Men, Accessories, Shoes).
+- **Product Details**: Dedicated page for every product with descriptions, pricing, and ratings.
+
+### 🛒 E-Commerce Functionality
+- **Cart Management**: Add items, update quantities, removable items, and dynamic total calculation.
+- **Wishlist**: Save favorite items for later.
+- **Persistent State**: Cart and Wishlist data are saved in `localStorage`, so you never lose your items on refresh.
+- **Checkout**: A clean, responsive checkout form with order summary.
+
+### 👤 User Authentication (Simulated)
+- **Login & Registration**: Functional forms with validation.
+- **User Persistence**: Remembers logged-in users and displays their name in the navigation.
+- **Session Management**: Logout functionality clears the session.
+
+### 🎨 UI/UX Design
+- **Modern Aesthetics**: Glassmorphism, smooth transitions, and hover effects.
+- **Fully Responsive**: Optimized for Mobile, Tablet, and Desktop.
+- **Custom 404 Page**: An animated, friendly error page.
+- **Toast Notifications**: Real-time feedback for user actions (e.g., "Added to Cart").
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Icons**: [Bootstrap Icons](https://icons.getbootstrap.com/) & [Remix Icons](https://remixicon.com/)
+- **Fonts**: Audiowide, Golos Text, Lufga (Local Fonts)
+- **State Management**: React Context API (`ShopContext`)
+- **Notifications**: `react-toastify`
+
+## 📂 Project Structure
+
+```
+fashique/
+├── app/
+│   ├── Components/         # Shared components (Navbar, Footer)
+│   ├── context/            # Global State (ShopContext)
+│   ├── JsonData/           # Mock Data (products.ts)
+│   ├── UI-Components/      # Feature-specific components
+│   │   ├── Index/          # Homepage Sections (Hero, Trending, etc.)
+│   │   ├── Pages/          # Functional Pages (Cart, Login, etc.)
+│   │   └── Shop/           # Shop Page & Product Details
+│   ├── layout.tsx          # Root Layout (Providers & Global Styles)
+│   └── page.tsx            # Homepage Entry
+├── public/                 # Static Assets (Images, Fonts)
+└── README.md               # Project Documentation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚡ Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/your-username/fashique.git
+    cd fashique
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-## Learn More
+3.  **Run the development server**:
+    ```bash
+    npm run dev
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+4.  **Open in Browser**:
+    Visit [http://localhost:3000](http://localhost:3000) to see the app in action.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🤝 Credits
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Design by**: Haseeb
+- **Code by**: Haseeb
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*This project was created as a demonstration of modern web development capabilities using Next.js and React.*
