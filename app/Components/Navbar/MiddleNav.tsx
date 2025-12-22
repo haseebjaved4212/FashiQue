@@ -11,7 +11,7 @@ const MiddleNav = () => {
     <div className="w-full bg-(--prim) border-b border-gray-300 relative">
         <div className="flex items-center justify-between px-[8%] lg:px-[16%] py-3 ">
           {/* logo */}
-   <Link href="/" className="text-4xl lg:text-5xl font-bold Audiowide text-black">Fashi<span className="text-(--second)">Que</span></Link>
+   <Link href="/" className="text-3xl lg:text-4xl font-bold Audiowide text-black">Fashi<span className="text-(--second)">Que</span></Link>
             {/* Search Box  */}
             <div className="relative flex flex-col flex-1 ms-6 mx-0 bg-white  rounded-lg lg:max-w-2xl  ">
               <div className="flex items-center">
