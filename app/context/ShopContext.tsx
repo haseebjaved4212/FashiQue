@@ -1,7 +1,6 @@
 "use client"
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { Product } from '../JsonData/products';
 
 type CartItem = Product & { quantity: number };

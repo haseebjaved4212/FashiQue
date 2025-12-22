@@ -42,6 +42,7 @@ const lufga = localFont({
 });
 import { ShopProvider } from "./context/ShopContext";
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // ... (existing imports)
 
