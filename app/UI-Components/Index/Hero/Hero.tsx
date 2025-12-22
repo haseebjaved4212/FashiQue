@@ -30,7 +30,7 @@ const Hero = () => {
                             Shop Now
                             <i className="ri-arrow-right-line group-hover:translate-x-1 transition-transform"></i>
                         </Link>
-                        <Link href="/UI-Components/Index/Trending"
+                        <Link href="/UI-Components/Shop"
                             className="px-10 py-4 border-2 border-black text-black rounded-full hover:bg-black hover:text-white transition-all transform hover:scale-105 flex items-center justify-center gap-2">
                             View Collection
                         </Link>
