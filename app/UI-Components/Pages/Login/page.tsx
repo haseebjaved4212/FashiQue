@@ -14,7 +14,13 @@ const Login = () => {
         e.preventDefault()
         // Mock authentication
         if (email && password) {
-            login("User", email)
+            // Check against registered users
+            const existingUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            const foundUser = existingUsers.find((u: any) => u.email === email && u.password === password);
+
+            const userName = foundUser ? foundUser.name : email.split('@')[0];
+
+            login(userName, email)
             router.push('/')
         }
     }

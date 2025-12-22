@@ -15,6 +15,11 @@ const Registration = () => {
         e.preventDefault()
         // Mock registration
         if (name && email && password) {
+            // Save to registered users
+            const existingUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            const newUser = { name, email, password };
+            localStorage.setItem('registeredUsers', JSON.stringify([...existingUsers, newUser]));
+
             login(name, email)
             router.push('/')
         }
