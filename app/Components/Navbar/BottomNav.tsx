@@ -100,6 +100,14 @@ const BottomNav = () => {
                </div>
                     
             </div>
+            {/* Mobile Menu */} 
+            {mobileMenuOpen && (
+                
+                <div className="lg:hidden border-t border-gray-200  mt-3 transition-all duration-500 bg-white fixed top-0 left-0 right-0 z-50">
+                
+            </div>
+            )}
+            
         </div>
                 
     )
