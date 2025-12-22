@@ -13,16 +13,15 @@ type NavLink = {
 const navLinks: NavLink[] = [
     { label: "Home", href: "/" },
     {
-        label: "Shop", href: "/app/UI-Components/Shop", dropdown: [
-            { label: "Shop", href: "/app/UI-Components/Shop" },
-            { label: "Details", href: "/app/UI-Components/Shop/12" },
-            { label: "Cart", href: "/app/UI-Components/Cart" },
-            { label: "Checkout", href: "/app/UI-Components/Checkout" },
-            { label: "Wishlist", href: "/app/UI-Components/Wishlist" },
+        label: "Shop", href: "/UI-Components/Shop", dropdown: [
+            { label: "Shop", href: "/UI-Components/Shop" },
+            { label: "Details", href: "/UI-Components/Shop/12" },
+            { label: "Cart", href: "/UI-Components/Pages/Cart" },
+            { label: "Checkout", href: "/UI-Components/Pages/Checkout" },
+            { label: "Wishlist", href: "/UI-Components/Pages/Wishlist" },
         ]
     },
-    { label: "About", href: "/app/UI-Components/About" },
-    { label: "Contact", href: "/app/UI-Components/Contact" },
+    
 ]
 
 const BottomNav = () => {
@@ -54,11 +53,22 @@ const BottomNav = () => {
                 {/* Mobile Logo */}
                 <Link href="/" className={`text-3xl lg:text-4xl font-bold Audiowide text-black block lg:hidden `}>Fashi<span className="text-(--second)">Que</span></Link>
                 {/* Desktop Menu */}
-                <div className="hidden lg:flex space-x-5 menu-link relative z-40">
+                <nav className="hidden lg:flex space-x-5 menu-link relative z-40">
                     {navLinks.map((link) =>
                         link.dropdown ? (
                             <div key={link.label} className="relative group">
                                 <Link href={link.href} className="GolosText  flex items-center gap-1">{link.label} <Image src={menuDot} alt="menu-dot"  /></Link>
+                                <div className="absolute top-full left-0  hidden group-hover:block  bg-white shadow-lg p-2 border border-gray-100 rounded-lg min-w-[170px]">
+                                    {link.dropdown.map((item) => (
+                                        <Link
+                                         key={item.label}
+                                          href={item.href} className="block py-2 px-4 hover:bg-gray-100 rounded-md transition-all duration-300">
+                                            <div className="flex gap-1 ">
+                                                {/* <Image src={menuDot} alt={item.label}  /></div>{item.label}
+                                                // </Link> */}
+                                            </div>{item.label}</Link>
+                                    ))}
+                                </div>
                             </div>
 
                         ) : (
@@ -67,6 +77,18 @@ const BottomNav = () => {
 
 
                         ))}
+                </nav>
+                {/* Right Icons */}
+                <div className="flex items-center gap-5">
+                    <Link href="/app/UI-Components/Pages/Login" className=" login-link border-b  border-gray-400  GolosText ">Login / Register</Link>
+                    <div className="flex items-center gap-6">
+                        <Link href="/app/UI-Components/Pages/Wishlist" className="relative">
+                        <i className="bi bi-balloon-heart text-2xl "></i>
+                        </Link>
+                        <Link href="/app/UI-Components/Pages/Wishlist" className="relative">
+                        <i className="bi bi-cart3 text-2xl "></i>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>
