@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Audiowide, Golos_Text } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import Navbar from "./Components/Navbar/Navbar";
 
 const audiowide = Audiowide({
   subsets: ["latin"],
@@ -48,6 +49,7 @@ export default function RootLayout({
       <body
         className={`${audiowide.variable} ${golostext.variable} ${lufga.variable} font-sans`}
       >
+        <Navbar />
         {children}
       </body>
     </html>
