@@ -64,8 +64,8 @@ const Footer = () => {
                         © 2023 FashiQue. All rights reserved.
                     </p>
                     <div className="flex gap-6">
-                        <p className="text-gray-500 text-sm">Design by <span className="text-black font-semibold">BrandOx</span></p>
-                        <p className="text-gray-500 text-sm">Code by <span className="text-black font-semibold">Dev</span></p>
+                        <p className="text-gray-500 text-sm">Design by <span className="text-black font-semibold">Haseeb</span></p>
+                        <p className="text-gray-500 text-sm">Code by <span className="text-black font-semibold">Haseeb</span></p>
                     </div>
                 </div>
             </div>
