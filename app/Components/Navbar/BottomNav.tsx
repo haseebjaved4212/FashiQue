@@ -69,7 +69,7 @@ const BottomNav = () => {
                 <div className="flex items-center gap-5">
                     {user ? (
                         <div className="flex items-center gap-3">
-                            <span className="text-sm font-bold truncate max-w-[100px] hidden sm:block">Hi, {user.name}</span>
+                            <span className="text-sm font-bold truncate max-w-[150px] hidden sm:block">Hi, {user.name}</span>
                             <button onClick={logout} className="text-sm border-b border-gray-400 hover:border-black transition-all">Logout</button>
                         </div>
                     ) : (
