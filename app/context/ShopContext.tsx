@@ -26,6 +26,7 @@ export const ShopProvider = ({ children }: { children: React.ReactNode }) => {
     const [cart, setCart] = useState<CartItem[]>([]);
     const [wishlist, setWishlist] = useState<Product[]>([]);
     const [user, setUser] = useState<{ name: string, email: string } | null>(null);
+    const [isInitialized, setIsInitialized] = useState(false);
 
     useEffect(() => {
         const savedCart = localStorage.getItem('cart');
@@ -34,23 +35,30 @@ export const ShopProvider = ({ children }: { children: React.ReactNode }) => {
         if (savedCart) setCart(JSON.parse(savedCart));
         if (savedWishlist) setWishlist(JSON.parse(savedWishlist));
         if (savedUser) setUser(JSON.parse(savedUser));
+        setIsInitialized(true);
     }, []);
 
     useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }, [cart]);
-
-    useEffect(() => {
-        localStorage.setItem('wishlist', JSON.stringify(wishlist));
-    }, [wishlist]);
-
-    useEffect(() => {
-        if (user) {
-            localStorage.setItem('user', JSON.stringify(user));
-        } else {
-            localStorage.removeItem('user');
+        if (isInitialized) {
+            localStorage.setItem('cart', JSON.stringify(cart));
         }
-    }, [user]);
+    }, [cart, isInitialized]);
+
+    useEffect(() => {
+        if (isInitialized) {
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        }
+    }, [wishlist, isInitialized]);
+
+    useEffect(() => {
+        if (isInitialized) {
+            if (user) {
+                localStorage.setItem('user', JSON.stringify(user));
+            } else {
+                localStorage.removeItem('user');
+            }
+        }
+    }, [user, isInitialized]);
 
     const addToCart = (product: Product) => {
         const existing = cart.find(item => item.id === product.id);
