@@ -40,6 +40,11 @@ const lufga = localFont({
   ],
   variable: "--font-lufga",
 });
+import { ShopProvider } from "./context/ShopContext";
+import { ToastContainer } from 'react-toastify';
+
+// ... (existing imports)
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -50,9 +55,12 @@ export default function RootLayout({
       <body
         className={`${audiowide.variable} ${golostext.variable} ${lufga.variable} font-sans`}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <ShopProvider>
+          <Navbar />
+          {children}
+          <Footer />
+          <ToastContainer position="bottom-right" autoClose={3000} />
+        </ShopProvider>
       </body>
     </html>
   );

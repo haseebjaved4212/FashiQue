@@ -3,6 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import menuDot from "@/public/E-Commerce-uiCode/assets/Menu-dot.svg"
 import { useEffect, useState } from "react"
+import { useShop } from '@/app/context/ShopContext'
 
 type NavLink = {
     label: string;
@@ -15,20 +16,17 @@ const navLinks: NavLink[] = [
     {
         label: "Shop", href: "/UI-Components/Shop", dropdown: [
             { label: "Shop", href: "/UI-Components/Shop" },
-            { label: "Details", href: "/UI-Components/Shop/12" },
             { label: "Cart", href: "/UI-Components/Pages/Cart" },
             { label: "Checkout", href: "/UI-Components/Pages/Checkout" },
             { label: "Wishlist", href: "/UI-Components/Pages/Wishlist" },
         ]
     },
-    
 ]
 
 const BottomNav = () => {
     const [isFixed, setIsFixed] = useState(false)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const [openDropDown, setOpenDropDown] = useState<Record<string, boolean>>({})
-
+    const { cart, wishlist } = useShop()
 
     useEffect(() => {
         const handleScroll = () => setIsFixed(window.scrollY > 50);
@@ -37,13 +35,6 @@ const BottomNav = () => {
             window.removeEventListener("scroll", handleScroll)
         }
     }, []);
-
-    const toggleDropdown = (label: string) => {
-        setOpenDropDown((prev) => ({
-            ...Object.fromEntries(Object.keys(prev).map((key) => [key, false])),
-            [label]: !prev[label],
-        }))
-    }
 
     return (
         <div className={`w-full bg-white  shadow-sm transition-all duration-500 py-5 ${isFixed ? "fixed top-0 left-0  z-50 fixed-nav" : ""} `}>
@@ -57,59 +48,63 @@ const BottomNav = () => {
                     {navLinks.map((link) =>
                         link.dropdown ? (
                             <div key={link.label} className="relative group">
-                                <Link href={link.href} className="GolosText  flex items-center gap-1">{link.label} <Image src={menuDot} alt="menu-dot"  /></Link>
+                                <Link href={link.href} className="GolosText  flex items-center gap-1">{link.label} <Image src={menuDot} alt="menu-dot" /></Link>
                                 <div className="absolute top-full left-0  hidden group-hover:block  bg-white shadow-lg p-2 border border-gray-100 rounded-lg min-w-[170px]">
                                     {link.dropdown.map((item) => (
                                         <Link
-                                         key={item.label}
-                                          href={item.href} className="block py-2 px-4 hover:bg-gray-100 rounded-md transition-all duration-300">
-                                            <div className="flex gap-1 ">
-                                                {/* <Image src={menuDot} alt={item.label}  /></div>{item.label}
-                                                // </Link> */}
-                                            </div>{item.label}</Link>
+                                            key={item.label}
+                                            href={item.href} className="block py-2 px-4 hover:bg-gray-100 rounded-md transition-all duration-300">
+                                            {item.label}
+                                        </Link>
                                     ))}
                                 </div>
                             </div>
 
                         ) : (
-                        <Link key={link.label} href={link.href} className="GolosText  flex items-center gap-1 ">{link.label}
-                        <Image src={menuDot} alt="menu-dot"  /></Link>
-
-
+                            <Link key={link.label} href={link.href} className="GolosText  flex items-center gap-1 ">{link.label}
+                                <Image src={menuDot} alt="menu-dot" /></Link>
                         ))}
                 </nav>
                 {/* Right Icons */}
                 <div className="flex items-center gap-5">
-                    <Link href="/app/UI-Components/Pages/Login" className=" login-link border-b  border-gray-400  GolosText ">Login / Register</Link>
+                    <Link href="/UI-Components/Pages/Login" className=" login-link border-b  border-gray-400  GolosText ">Login / Register</Link>
                     <div className="flex items-center gap-6">
-                        <Link href="/app/UI-Components/Pages/Wishlist" className="relative">
-                        <i className="bi bi-balloon-heart text-2xl "></i>
+                        <Link href="/UI-Components/Pages/Wishlist" className="relative group">
+                            <i className="bi bi-balloon-heart text-2xl "></i>
+                            {wishlist.length > 0 && <span className="absolute -top-2 -right-2 bg-(--second) text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full">{wishlist.length}</span>}
                         </Link>
-                        <Link href="/app/UI-Components/Pages/Wishlist" className="relative">
-                        <i className="bi bi-cart3 text-2xl "></i>
+                        <Link href="/UI-Components/Pages/Cart" className="relative group">
+                            <i className="bi bi-cart3 text-2xl "></i>
+                            {cart.length > 0 && <span className="absolute -top-2 -right-2 bg-(--second) text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full">{cart.length}</span>}
                         </Link>
                     </div>
                 </div>
                 {/* Mobile Menu Button */}
-               <div className="lg:hidden flex items-center justify-between gap-4">
-                <button
-                onClick={()=>setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-2xl focus:outline-none">
-                    <i className="ri-menu-line"></i>
-                </button>
-               </div>
-                    
+                <div className="lg:hidden flex items-center justify-between gap-4">
+                    <button
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        className="text-2xl focus:outline-none">
+                        <i className="ri-menu-line"></i>
+                    </button>
+                </div>
+
             </div>
-            {/* Mobile Menu */} 
+            {/* Mobile Menu */}
             {mobileMenuOpen && (
-                
-                <div className="lg:hidden border-t border-gray-200  mt-3 transition-all duration-500 bg-white fixed top-0 left-0 right-0 z-50">
-                
-            </div>
+                <div className="lg:hidden border-t border-gray-200 mt-3 p-4 bg-white fixed top-[80px] left-0 right-0 z-50 shadow-lg">
+                    {navLinks.map((link) => (
+                        <div key={link.label}>
+                            <Link href={link.href} className="block py-2 font-bold">{link.label}</Link>
+                            {link.dropdown && link.dropdown.map(sub => (
+                                <Link key={sub.label} href={sub.href} className="block py-2 pl-4 text-sm text-gray-600 border-l border-gray-100 ml-1">{sub.label}</Link>
+                            ))}
+                        </div>
+                    ))}
+                </div>
             )}
-            
+
         </div>
-                
+
     )
 }
 
