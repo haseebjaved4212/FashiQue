@@ -9,12 +9,15 @@ type CartItem = Product & { quantity: number };
 type ShopContextType = {
     cart: CartItem[];
     wishlist: Product[];
+    user: { name: string, email: string } | null;
     addToCart: (product: Product) => void;
     removeFromCart: (id: number) => void;
     updateQuantity: (id: number, amount: number) => void;
     addToWishlist: (product: Product) => void;
     removeFromWishlist: (id: number) => void;
     clearCart: () => void;
+    login: (name: string, email: string) => void;
+    logout: () => void;
 };
 
 const ShopContext = createContext<ShopContextType | undefined>(undefined);
@@ -22,12 +25,15 @@ const ShopContext = createContext<ShopContextType | undefined>(undefined);
 export const ShopProvider = ({ children }: { children: React.ReactNode }) => {
     const [cart, setCart] = useState<CartItem[]>([]);
     const [wishlist, setWishlist] = useState<Product[]>([]);
+    const [user, setUser] = useState<{ name: string, email: string } | null>(null);
 
     useEffect(() => {
         const savedCart = localStorage.getItem('cart');
         const savedWishlist = localStorage.getItem('wishlist');
+        const savedUser = localStorage.getItem('user');
         if (savedCart) setCart(JSON.parse(savedCart));
         if (savedWishlist) setWishlist(JSON.parse(savedWishlist));
+        if (savedUser) setUser(JSON.parse(savedUser));
     }, []);
 
     useEffect(() => {
@@ -37,6 +43,14 @@ export const ShopProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         localStorage.setItem('wishlist', JSON.stringify(wishlist));
     }, [wishlist]);
+
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+        } else {
+            localStorage.removeItem('user');
+        }
+    }, [user]);
 
     const addToCart = (product: Product) => {
         setCart((prev) => {
@@ -85,8 +99,18 @@ export const ShopProvider = ({ children }: { children: React.ReactNode }) => {
         toast.error("Removed from Wishlist");
     };
 
+    const login = (name: string, email: string) => {
+        setUser({ name, email });
+        toast.success(`Welcome back, ${name}!`);
+    };
+
+    const logout = () => {
+        setUser(null);
+        toast.info("Logged out successfully");
+    };
+
     return (
-        <ShopContext.Provider value={{ cart, wishlist, addToCart, removeFromCart, updateQuantity, addToWishlist, removeFromWishlist, clearCart }}>
+        <ShopContext.Provider value={{ cart, wishlist, user, addToCart, removeFromCart, updateQuantity, addToWishlist, removeFromWishlist, clearCart, login, logout }}>
             {children}
         </ShopContext.Provider>
     );

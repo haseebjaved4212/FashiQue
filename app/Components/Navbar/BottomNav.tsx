@@ -67,7 +67,14 @@ const BottomNav = () => {
                 </nav>
                 {/* Right Icons */}
                 <div className="flex items-center gap-5">
-                    <Link href="/UI-Components/Pages/Login" className=" login-link border-b  border-gray-400  GolosText ">Login / Register</Link>
+                    {user ? (
+                        <div className="flex items-center gap-3">
+                            <span className="text-sm font-bold truncate max-w-[100px] hidden sm:block">Hi, {user.name}</span>
+                            <button onClick={logout} className="text-sm border-b border-gray-400 hover:border-black transition-all">Logout</button>
+                        </div>
+                    ) : (
+                        <Link href="/UI-Components/Pages/Login" className=" login-link border-b  border-gray-400  GolosText ">Login / Register</Link>
+                    )}
                     <div className="flex items-center gap-6">
                         <Link href="/UI-Components/Pages/Wishlist" className="relative group">
                             <i className="bi bi-balloon-heart text-2xl "></i>
