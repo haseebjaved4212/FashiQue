@@ -2,7 +2,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import menuDot from "@/public/E-Commerce-uiCode/assets/menu-dot.svg"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 type NavLink = {
     label: string;
@@ -25,6 +25,25 @@ const navLinks: NavLink[] = [
 
 const BottomNav = () => {
     const [isFixed, setIsFixed] = useState(false)
+    const [mobileMenuOpen,  setMobileMenuOpen] = useState(false)
+    const [openDropDown,  setOpenDropDown] = useState<Record<string, boolean>>({})
+  
+
+    useEffect(() =>{
+        const handleScroll = () => setIsFixed(window.scrollY > 50);
+        window.addEventListener("scroll", handleScroll)
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+        }
+    }, []);
+
+    const toggleDropdown = (label: string) => {
+        setOpenDropDown((prev) => ({
+            ...Object.fromEntries(Object.keys(prev).map((key) => [key, false])),
+            [label]: !prev[label],
+        }))
+    }   
+    
   return (
     <div className={`w-full bg-white  shadow-sm transition-all duration-500 py-5 ${isFixed ? "fixed top-0 left-0  z-50 fixed-nav" : ""} `}>
         <div className="flex items-center justify-between px-[8%] lg:px-[16%] text-gray-700 ">
