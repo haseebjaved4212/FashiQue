@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "title": "The Future of Fashion",
+        "excerpt": "Discover what's trending in 2024 and beyond.",
+        "content": "Full content of the future of fashion blog post...",
+        "image": "/images/blog1.jpg",
+        "date": "2024-01-01",
+        "author": "Jane Doe"
+    },
+    {
+        "id": 2,
+        "title": "Sustainable Clothing",
+        "excerpt": "How to build an eco-friendly wardrobe.",
+        "content": "Full content of sustainable clothing blog post...",
+        "image": "/images/blog2.jpg",
+        "date": "2024-01-15",
+        "author": "John Smith"
+    }
+]
